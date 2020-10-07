@@ -6,7 +6,6 @@ import com.valentinNikolaev.jsonCrud.dao.UserJsonDaoImpl;
 import com.valentinNikolaev.jsonCrud.repository.PostRepository;
 import com.valentinNikolaev.jsonCrud.repository.RegionRepository;
 import com.valentinNikolaev.jsonCrud.repository.UserRepository;
-import com.valentinNikolaev.jsonCrud.service.jsonParser.UserParser;
 
 public class ControllersIocContainer {
 
@@ -15,8 +14,8 @@ public class ControllersIocContainer {
     private static RegionControllerImpl regionController;
 
     static {
-        postController = new PostControllerImpl(new PostRepository(new PostJsonDaoImpl()));
-        userController = new UserControllerImpl(new UserRepository(new UserJsonDaoImpl(new UserParser())));
+        postController   = new PostControllerImpl(new PostRepository(new PostJsonDaoImpl()));
+        userController   = new UserControllerImpl(new UserRepository(new UserJsonDaoImpl()));
         regionController = new RegionControllerImpl(new RegionRepository(new RegionJsonDaoImpl()));
 
         postController.setUserController(userController);

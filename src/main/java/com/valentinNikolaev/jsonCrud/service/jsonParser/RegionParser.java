@@ -17,11 +17,11 @@ public class RegionParser implements JsonParser<Region> {
 
     @Override
     public List<Region> parseList(String text) {
-        return null;
+        return parser.fromJson(text,type);
     }
 
     @Override
     public String serialise(List<Region> entities) {
-        return null;
+        return parser.toJson(entities,type);
     }
 }

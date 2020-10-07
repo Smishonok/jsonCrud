@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class FileService {
 
-    public static void createUserRepository(Path repositoryPath) {
+    public static void createRepository(Path repositoryPath) {
         if (! Files.exists(Constants.REPOSITORY_PATH)) {
             try {
                 Files.createDirectory(Constants.REPOSITORY_PATH);
@@ -27,8 +27,6 @@ public class FileService {
             }
         }
     }
-
-
 
     public static String getDataFromRepository(Path repositoryPath) {
         try {

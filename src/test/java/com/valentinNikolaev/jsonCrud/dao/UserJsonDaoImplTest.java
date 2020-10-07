@@ -1,15 +1,14 @@
 package com.valentinNikolaev.jsonCrud.dao;
 
 import com.valentinNikolaev.jsonCrud.models.Region;
-import com.valentinNikolaev.jsonCrud.service.jsonParser.UserParser;
-import org.junit.Test;
 import com.valentinNikolaev.jsonCrud.models.User;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserJsonDaoImplTest {
 
-    private UserDao userDao = new UserJsonDaoImpl(new UserParser());
+    private UserDao userDao = new UserJsonDaoImpl();
 
     @Test
     public void whenAddUserToRepoThenUserAddedInRepo() {
