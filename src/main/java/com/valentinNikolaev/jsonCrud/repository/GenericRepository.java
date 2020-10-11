@@ -2,7 +2,7 @@ package com.valentinNikolaev.jsonCrud.repository;
 
 import java.util.List;
 
-public interface GenericDao<T,ID> {
+public interface GenericRepository<T,ID> {
 
     T add(T entity);
 
