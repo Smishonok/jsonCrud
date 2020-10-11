@@ -5,9 +5,11 @@ import com.valentinNikolaev.jsonCrud.controller.PostController;
 import com.valentinNikolaev.jsonCrud.controller.PostControllerImpl;
 import com.valentinNikolaev.jsonCrud.models.Post;
 import com.valentinNikolaev.jsonCrud.view.RequestHandler;
+import com.valentinNikolaev.jsonCrud.view.RequestParametersProcessor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ChangePostRequestHandler extends PostRequestHandler {
 
@@ -32,23 +34,24 @@ public class ChangePostRequestHandler extends PostRequestHandler {
 
     private void processRequest(List<String> options) {
         int optionsSize = options.size();
-        switch (optionsSize) {
-            case 1:
-                getHelpForChangingPostContentRequest(options);
-                break;
-            case 2:
-                changePost(options);
-                break;
-            default:
-                getErrorMessage();
-                break;
+        if (optionsSize == 0 || optionsSize == 1 && ! options.get(0).toLowerCase().equals("help")) {
+            getErrorMessage();
+            return;
         }
+
+        if (options.get(0).toLowerCase().equals("help")) {
+            getHelpForChangingPostContentRequest(options);
+            return;
+        }
+
+        changePost(options);
     }
 
     private void changePost(List<String> options) {
         Optional<Post> post = this.postController.getPost(options.get(0));
         if (post.isPresent()) {
-            this.postController.changePost(options.get(0), options.get(1));
+            String changedPost = String.join(" ", getOptionsWithOutFirst(options));
+            this.postController.changePost(options.get(0), changedPost);
         } else {
             System.out.println(
                     "The post with id: " + options.get(0) + " is not exists in repository." +

@@ -64,12 +64,25 @@ public class GetPostRequestHandler extends PostRequestHandler {
     }
 
     private void getPostBuId(List<String> requestOptions) {
+        List<Post> postsList = this.postController.getAllPostsList();
+        if (postsList.size() == 0) {
+            System.out.println("The repository is empty, no one post created.");
+            return;
+        }
+
         if (isOptionsValid(requestOptions) && isIdLong(requestOptions)) {
-            this.postController.getPost(requestOptions.get(0));
+            Post post = this.postController.getPost(requestOptions.get(0)).get();
+            printPost(post);
         }
     }
 
     private void getPostsListByUserId(List<String> requestOptions) {
+        List<Post> postsList = this.postController.getAllPostsList();
+        if (postsList.size() == 0) {
+            System.out.println("The repository is empty, no one post created.");
+            return;
+        }
+
         if (isOptionsValid(requestOptions) && isIdLong(requestOptions) && isUserExists(
                 requestOptions)) {
             List<Post> userPosts = this.postController.getPostsByUserId(requestOptions.get(0));
