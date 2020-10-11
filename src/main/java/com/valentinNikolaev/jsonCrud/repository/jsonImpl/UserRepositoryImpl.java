@@ -1,6 +1,7 @@
-package com.valentinNikolaev.jsonCrud.dao;
+package com.valentinNikolaev.jsonCrud.repository.jsonImpl;
 
 import com.valentinNikolaev.jsonCrud.models.User;
+import com.valentinNikolaev.jsonCrud.repository.UserRepository;
 import com.valentinNikolaev.jsonCrud.service.jsonParser.JsonParser;
 import com.valentinNikolaev.jsonCrud.service.jsonParser.JsonParserFactory;
 import com.valentinNikolaev.jsonCrud.utils.Constants;
@@ -8,11 +9,12 @@ import com.valentinNikolaev.jsonCrud.utils.Constants;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class UserJsonDaoImpl implements UserDao {
+public class UserRepositoryImpl implements UserRepository {
 
-    private JsonParser<User> parser = JsonParserFactory.getFactory(User.class).getParser();
-    private Path repositoryPath = Constants.REPOSITORY_PATH.resolve(
+    private JsonParser<User> parser         = JsonParserFactory.getFactory(User.class).getParser();
+    private Path             repositoryPath = Constants.REPOSITORY_PATH.resolve(
             Constants.USER_REPOSITORY_FILE_NAME);
 
     {
@@ -22,55 +24,46 @@ public class UserJsonDaoImpl implements UserDao {
     @Override
     public User add(User entity) {
         String repositoryData = FileService.getDataFromRepository(repositoryPath);
-        List<User> users = parser.parseList(repositoryData) == null
-                           ? new ArrayList<>()
-                           : parser.parseList(repositoryData);
+        List<User> users = parser.parseList(repositoryData) == null ? new ArrayList<>() :
+                parser.parseList(repositoryData);
         users.add(entity);
 
         String dataForWritingInRepo = parser.serialise(users);
         FileService.writeDataIntoRepository(dataForWritingInRepo, repositoryPath);
 
-        return parser
-                .parseList(FileService.getDataFromRepository(repositoryPath))
-                .stream()
-                .filter(user->user.equals(entity))
-                .findFirst()
-                .get();
+        return parser.parseList(FileService.getDataFromRepository(repositoryPath)).stream().filter(
+                user->user.equals(entity)).findFirst().get();
     }
 
     @Override
     public User get(Long aLong) {
-        return parser
-                .parseList(FileService.getDataFromRepository(repositoryPath))
-                .stream()
-                .filter(user->user.getId() == aLong)
-                .findFirst()
-                .get();
+        return parser.parseList(FileService.getDataFromRepository(repositoryPath)).stream().filter(
+                user->user.getId() == aLong).findFirst().get();
     }
 
     @Override
     public User change(User entity) {
-        String repositoryData = FileService.getDataFromRepository(repositoryPath);
-        List<User> users = parser.parseList(repositoryData);
+        String     repositoryData = FileService.getDataFromRepository(repositoryPath);
+        List<User> users          = parser.parseList(repositoryData);
 
-        users.stream().filter(user->user.getId() == entity.getId()).forEach(users::remove);
+        users
+                .stream()
+                .filter(user->user.getId() == entity.getId())
+                .collect(Collectors.toList())
+                .forEach(users::remove);
         users.add(entity);
 
         String dataForWritingInRepo = parser.serialise(users);
         FileService.writeDataIntoRepository(dataForWritingInRepo, repositoryPath);
 
-        return parser
-                .parseList(FileService.getDataFromRepository(repositoryPath))
-                .stream()
-                .filter(user->user.getId() == entity.getId())
-                .findFirst()
-                .get();
+        return parser.parseList(FileService.getDataFromRepository(repositoryPath)).stream().filter(
+                user->user.getId() == entity.getId()).findFirst().get();
     }
 
     @Override
     public boolean remove(Long aLong) {
-        String repositoryData = FileService.getDataFromRepository(repositoryPath);
-        List<User> users = parser.parseList(repositoryData);
+        String     repositoryData = FileService.getDataFromRepository(repositoryPath);
+        List<User> users          = parser.parseList(repositoryData);
 
         users.stream().filter(user->user.getId() == aLong).forEach(users::remove);
         return parser
@@ -81,9 +74,9 @@ public class UserJsonDaoImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-        return parser.parseList(FileService.getDataFromRepository(repositoryPath)) == null
-               ? new ArrayList<>()
-               : parser.parseList(FileService.getDataFromRepository(repositoryPath));
+        return parser.parseList(FileService.getDataFromRepository(repositoryPath)) == null ?
+                new ArrayList<>() : parser.parseList(
+                FileService.getDataFromRepository(repositoryPath));
     }
 
     @Override

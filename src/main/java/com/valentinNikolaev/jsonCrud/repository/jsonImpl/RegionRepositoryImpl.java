@@ -1,6 +1,7 @@
-package com.valentinNikolaev.jsonCrud.dao;
+package com.valentinNikolaev.jsonCrud.repository.jsonImpl;
 
 import com.valentinNikolaev.jsonCrud.models.Region;
+import com.valentinNikolaev.jsonCrud.repository.RegionRepository;
 import com.valentinNikolaev.jsonCrud.service.jsonParser.JsonParser;
 import com.valentinNikolaev.jsonCrud.service.jsonParser.JsonParserFactory;
 import com.valentinNikolaev.jsonCrud.utils.Constants;
@@ -9,7 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegionJsonDaoImpl implements RegionDao {
+public class RegionRepositoryImpl implements RegionRepository {
 
     private JsonParser<Region> parser = JsonParserFactory.getFactory(Region.class).getParser();
     private Path repositoryPath = Constants.REPOSITORY_PATH.resolve(

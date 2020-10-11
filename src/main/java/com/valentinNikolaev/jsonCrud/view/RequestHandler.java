@@ -9,11 +9,12 @@ public abstract class RequestHandler {
     protected final String GET    = "get";
     protected final String CHANGE = "change";
     protected final String REMOVE = "remove";
-    protected final String                     HELP   = "help";
+    protected final String HELP   = "help";
 
     private RequestHandler nextRequestHandler;
 
-    public RequestHandler() {}
+    public RequestHandler() {
+    }
 
     public RequestHandler(RequestHandler nextRequestHandler) {
         this.nextRequestHandler = nextRequestHandler;
@@ -46,13 +47,19 @@ public abstract class RequestHandler {
     public abstract void getHelp();
 
     public List<String> getOptionsWithOutFirst(List<String> options) {
-        RequestParametersProcessor stringProcessor = new RequestParametersProcessor();
-        return stringProcessor.getOptionsWithOutFirst(options);
+        if (options.size() > 1) {
+            return options.subList(1, options.size() );
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     protected boolean isLong(String string) {
-        RequestParametersProcessor stringProcessor = new RequestParametersProcessor();
-        return stringProcessor.isLong(string);
+        try {
+            Long.parseLong(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
-
 }

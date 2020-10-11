@@ -1,6 +1,7 @@
-package com.valentinNikolaev.jsonCrud.dao;
+package com.valentinNikolaev.jsonCrud.repository.jsonImpl;
 
 import com.valentinNikolaev.jsonCrud.models.Post;
+import com.valentinNikolaev.jsonCrud.repository.PostRepository;
 import com.valentinNikolaev.jsonCrud.service.jsonParser.JsonParser;
 import com.valentinNikolaev.jsonCrud.service.jsonParser.JsonParserFactory;
 import com.valentinNikolaev.jsonCrud.utils.Constants;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PostJsonDaoImpl implements PostDao {
+public class PostRepositoryImpl implements PostRepository {
 
     private JsonParser<Post> parser         = JsonParserFactory.getFactory(Post.class).getParser();
     private Path             repositoryPath = Constants.REPOSITORY_PATH.resolve(

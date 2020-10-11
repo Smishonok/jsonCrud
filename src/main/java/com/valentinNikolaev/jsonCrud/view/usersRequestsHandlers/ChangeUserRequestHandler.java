@@ -42,6 +42,7 @@ public class ChangeUserRequestHandler extends UserRequestHandler {
                     System.out.println("Invalid request format. Check the request format and try " +
                                                "again or get help information.");
                 }
+                break;
             default:
                 System.out.println("Invalid request type. Check the request type and try again or" +
                                            " get help information");

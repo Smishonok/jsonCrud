@@ -1,20 +1,21 @@
-package com.valentinNikolaev.jsonCrud.dao;
+package com.valentinNikolaev.jsonCrud.repository.jsonImpl;
 
 import com.valentinNikolaev.jsonCrud.models.Region;
 import com.valentinNikolaev.jsonCrud.models.User;
+import com.valentinNikolaev.jsonCrud.repository.UserRepository;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class UserJsonDaoImplTest {
+public class UserRepositoryImplTest {
 
-    private UserDao userDao = new UserJsonDaoImpl();
+    private UserRepository userRepository = new UserRepositoryImpl();
 
     @Test
     public void whenAddUserToRepoThenUserAddedInRepo() {
         User user = new User(1l, "Valentin", "Nikolaev", new Region(1, "Moscow"));
-        userDao.add(user);
-        assertEquals(user,userDao.get(user.getId()));
+        userRepository.add(user);
+        assertEquals(user, userRepository.get(user.getId()));
     }
 
 

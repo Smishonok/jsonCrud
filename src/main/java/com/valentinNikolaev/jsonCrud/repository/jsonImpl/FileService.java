@@ -1,4 +1,4 @@
-package com.valentinNikolaev.jsonCrud.dao;
+package com.valentinNikolaev.jsonCrud.repository.jsonImpl;
 
 import com.valentinNikolaev.jsonCrud.utils.Constants;
 

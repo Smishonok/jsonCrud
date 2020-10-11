@@ -17,14 +17,12 @@ public class MainView {
     private PostView                   postView;
     private RegionView                 regionView;
     private UserView                   userView;
-    private RequestParametersProcessor requestParametersProcessor;
     private String                     requestType;
 
     public MainView() throws ClassNotFoundException {
         this.postView              = new PostView();
         this.regionView            = new RegionView();
         this.userView              = new UserView();
-        requestParametersProcessor = new RequestParametersProcessor();
     }
 
     public void initiateMainView() throws ClassNotFoundException {

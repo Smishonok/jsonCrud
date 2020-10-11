@@ -40,7 +40,6 @@ public class GetUserRequestHandler extends UserRequestHandler {
                 getHelpForGettingUserDataRequest();
                 break;
             case ID:
-                System.out.println(requestOptions);
                 if (requestOptions.size() == 1) {
                     getUserByID(requestOptions.get(0));
                 } else {

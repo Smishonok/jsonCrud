@@ -1,8 +1,8 @@
 package com.valentinNikolaev.jsonCrud.controller;
 
 import com.valentinNikolaev.jsonCrud.models.Post;
-import com.valentinNikolaev.jsonCrud.repository.PostRepository;
 import com.valentinNikolaev.jsonCrud.models.User;
+import com.valentinNikolaev.jsonCrud.repository.PostRepository;
 
 import java.util.List;
 import java.util.Optional;

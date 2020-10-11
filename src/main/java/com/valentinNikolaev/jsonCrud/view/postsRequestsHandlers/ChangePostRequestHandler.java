@@ -2,14 +2,11 @@ package com.valentinNikolaev.jsonCrud.view.postsRequestsHandlers;
 
 import com.valentinNikolaev.jsonCrud.controller.ControllersIocContainer;
 import com.valentinNikolaev.jsonCrud.controller.PostController;
-import com.valentinNikolaev.jsonCrud.controller.PostControllerImpl;
 import com.valentinNikolaev.jsonCrud.models.Post;
 import com.valentinNikolaev.jsonCrud.view.RequestHandler;
-import com.valentinNikolaev.jsonCrud.view.RequestParametersProcessor;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ChangePostRequestHandler extends PostRequestHandler {
 

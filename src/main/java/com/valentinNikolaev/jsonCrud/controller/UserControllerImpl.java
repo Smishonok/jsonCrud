@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class UserControllerImpl implements UserController {
 
-    private UserRepository usersRepository;
+    private UserRepository   usersRepository;
     private RegionController regionController;
 
     public UserControllerImpl(UserRepository usersRepository) {
